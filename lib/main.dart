@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:volume_control/volume_control.dart'; // volume_control 패키지 추가
 
 void main() => runApp(AlarmApp());
 
@@ -14,6 +15,7 @@ class AlarmApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Alarm App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -53,12 +55,12 @@ class _AlarmHomePageState extends State<AlarmHomePage> {
     final alarmDateTime = DateTime(dateTime.year, dateTime.month, dateTime.day, time.hour, time.minute);
 
     if (alarmDateTime.isBefore(now)) {
-        Fluttertoast.showToast(
-          msg: "현재시간 이후로 설정하여야 합니다.",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
-        return;
+      Fluttertoast.showToast(
+        msg: "현재시간 이후로 설정하여야 합니다.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
+      return;
     }
 
     Duration initialDelay = alarmDateTime.difference(now);
@@ -278,6 +280,27 @@ class _TimeSelectionScreenState extends State<TimeSelectionScreen> {
   TimeOfDay? selectedTime;
   DateTime? selectedDate;
   int intervalMinutes = 1;
+  double volume = 1.0; // 볼륨 상태
+
+  @override
+  void initState() {
+    super.initState();
+    _initVolume();
+  }
+
+  // 시스템 볼륨 초기화
+  Future<void> _initVolume() async {
+    volume = await VolumeControl.volume; // 현재 시스템 볼륨 값 가져오기
+    setState(() {});
+  }
+
+  // 시스템 볼륨 설정
+  Future<void> _setVolume(double newVolume) async {
+    await VolumeControl.setVolume(newVolume); // 새로 설정된 볼륨으로 시스템 볼륨 변경
+    setState(() {
+      volume = newVolume;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -336,6 +359,16 @@ class _TimeSelectionScreenState extends State<TimeSelectionScreen> {
                 setState(() {
                   intervalMinutes = value!;
                 });
+              },
+            ),
+            SizedBox(height: 32),
+            Text('시스템 볼륨 설정하기:'),
+            Slider(
+              value: volume,
+              min: 0.0,
+              max: 1.0,
+              onChanged: (newVolume) {
+                _setVolume(newVolume); // 볼륨 변경 함수 호출
               },
             ),
             SizedBox(height: 32),
