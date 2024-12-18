@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:volume_control/volume_control.dart'; // volume_control 패키지 추가
+import 'package:volume_control/volume_control.dart';
 
 // 앱의 진입점 (main 함수)
 void main() => runApp(AlarmApp());
