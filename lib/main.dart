@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:volume_control/volume_control.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 // 앱의 진입점 (main 함수)
 void main() => runApp(AlarmApp());

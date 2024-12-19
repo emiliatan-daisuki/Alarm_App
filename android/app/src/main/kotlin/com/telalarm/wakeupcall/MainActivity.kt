@@ -1,8 +1,5 @@
 package com.telalarm.wakeupcall
 
-
-
-import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -29,8 +26,9 @@ class MainActivity: FlutterActivity() {
         val mediaPlayer = MediaPlayer.create(this, R.raw.alarm_sound)
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM)
         mediaPlayer.setOnCompletionListener {
-            it.release()
+            mediaPlayer.release() // 'it' 대신 mediaPlayer를 명시적으로 사용
         }
         mediaPlayer.start()
     }
+
 }

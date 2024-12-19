@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1025130789348",
+    "project_id": "alarmapp-38064",
+    "storage_bucket": "alarmapp-38064.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025130789348:android:e4304c172d3eb6e39deff1",
+        "android_client_info": {
+          "package_name": "com.telalarm.wakeupcall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-jpIMaDlS5sexUzIgIeCdC_oIhzdGq90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
